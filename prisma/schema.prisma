@@ -1,0 +1,31 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql" // Ganti jika Anda menggunakan database lain
+  url      = env("DATABASE_URL") // Pastikan untuk mengatur variabel ini di .env
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  name     String @db.VarChar(100)
+  email    String @unique @db.VarChar(100)
+  password String @db.VarChar(255)
+
+  cards    Card[]
+}
+
+model Card {
+  id          Int    @id @default(autoincrement())
+  userId      Int
+  pokemonName String @db.VarChar(100)
+  pokemonId   Int
+  image       String @db.VarChar(255) // Menambahkan kolom image
+  quantity    Int    @default(1)       // Menambahkan kolom quantity dengan default 1
+
+  user        User   @relation(fields: [userId], references: [id])
+}
+
