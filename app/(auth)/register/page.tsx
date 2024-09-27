@@ -1,6 +1,7 @@
 "use client";
 
 import { createUser } from "@/app/action/user";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 
@@ -16,11 +17,13 @@ export default function RegisterPage() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
-
+  const router = useRouter();
   const onSubmit = async (data: FormData) => {
     try {
       const user = await createUser(data.name, data.email, data.password);
-      console.log("User created:", user);
+      if (user) {
+        router.push("/login");
+      }
       // Redirect or show success message here
     } catch (error) {
       console.error("Registration error:", error);

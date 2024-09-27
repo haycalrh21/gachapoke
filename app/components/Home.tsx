@@ -81,7 +81,7 @@ export default function Home({ session }: HomeProps) {
 
     try {
       const savedCard = await saveCard(userId, newCard);
-      console.log(savedCard);
+      return savedCard;
     } catch (error) {
       console.error("Error saving card:", error);
     }

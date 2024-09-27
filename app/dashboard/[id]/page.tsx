@@ -23,10 +23,13 @@ interface Card {
 export default function Dashboard() {
   const { id } = useParams<{ id: string }>();
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const fetchUser = async (id: string) => {
+    setLoading(true);
     try {
       const res = await getUserId(id);
+      setLoading(false);
       if (res) {
         setUser({
           id: res.id,
@@ -34,29 +37,27 @@ export default function Dashboard() {
           email: res.email,
           cards: [...res.cards],
         });
-        console.log("User found:", res);
+        // console.log("User found:", res);
       } else {
-        console.log("User not found");
+        // console.log("User not found");
       }
     } catch (error) {
+      setLoading(false); // Pastikan untuk menonaktifkan loading jika terjadi error
       console.error("Error fetching user:", error);
     }
   };
 
   useEffect(() => {
     fetchUser(id);
-  }, []);
+  }, [id]); // Pastikan id ditambahkan sebagai dependensi
 
   return (
     <div className="max-w-4xl mx-auto p-4 bg-white shadow-md rounded-lg">
-      <h1 className="text-2xl font-bold mb-4 text-center">Dashboard </h1>
-      {user ? (
-        <div>
-          {/* <h2 className="text-xl font-semibold mb-2">User Details:</h2>
-          <p className="text-gray-700">User ID: {user.id}</p>
-          <p className="text-gray-700">Name: {user.name}</p>
-          <p className="text-gray-700">Email: {user.email}</p> */}
-        </div>
+      <h1 className="text-2xl font-bold mb-4 text-center">Dashboard</h1>
+      {loading ? (
+        <p className="text-center mt-4 text-gray-500">Loading...</p> // Menampilkan pesan loading
+      ) : user ? (
+        <div>{/* Tampilkan informasi pengguna di sini, jika diperlukan */}</div>
       ) : (
         <p className="mt-4 text-red-500">User not found.</p>
       )}
