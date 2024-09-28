@@ -48,7 +48,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
   callbacks: {
     async session({ session, token }) {
-      console.log("Session Callback", { session, token });
+      // console.log("Session Callback", { session, token });
       return {
         ...session,
         user: {
@@ -59,7 +59,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
 
     async jwt({ token, user }) {
-      console.log("JWT Callback", { token, user });
+      // console.log("JWT Callback", { token, user });
       if (user) {
         token.id = user.id; // Pastikan user.id adalah string
       }

@@ -1,15 +1,10 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext",
-      "es2020" // Menambahkan ES2020 untuk fitur terbaru
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true, // Mengaktifkan mode strict
-    "noEmit": true, // Tidak mengeluarkan file .js
+    "strict": true,
+    "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "bundler",
@@ -17,26 +12,15 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "forceConsistentCasingInFileNames": true, // Memastikan konsistensi casing
-    "noUnusedLocals": true, // Menemukan variabel lokal yang tidak digunakan
-    "noUnusedParameters": true, // Menemukan parameter yang tidak digunakan
-    "strictNullChecks": true, // Memeriksa null dan undefined
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": ["./*"] // Menyusun jalur alias
+      "@/*": ["./*"]
     }
   },
-  "include": [
-    "next-env.d.ts", // File untuk Next.js
-    "**/*.ts", // Semua file TypeScript
-    "**/*.tsx", // Semua file TypeScript dengan JSX
-    ".next/types/**/*.ts" // Tipe yang dihasilkan Next.js
-  ],
-  "exclude": [
-    "node_modules" // Mengecualikan folder node_modules
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }
